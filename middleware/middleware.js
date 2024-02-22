@@ -1,6 +1,7 @@
 const model=require("../models/user")
 const jwt=require("jsonwebtoken")
 const secretKey="donnn";
+const multer= require("multer")
 
 async function verifyToken(req,res,next){
     try{
@@ -45,4 +46,15 @@ if(typeof header != "undefined")
 
     }
 
-module.exports={verifyToken,author,isverify};
+    const upload= multer({
+        storage:multer.diskStorage({
+           destination:function(req,res,cb){
+            cb(null,"files")
+           },
+           filename:function(req,file,cb){
+            cb(null,file.fieldname+"-"+Date.now()+".csv")
+           }
+        })
+    }).single("file")
+
+module.exports={verifyToken,author,isverify,upload};

@@ -1,8 +1,9 @@
 const express=require("express")
 const router=express.Router();
-const {signUp,Login,update,deleete,addPost,getuser,getUserById,UpdateById,deleteById}=require("../controller/controller")
+const {signUp,Login,update,deleete,addPost,getuser,getUserById,UpdateById,deleteById
+,exportUser,importUser}=require("../controller/controller")
 // const passport=require("passport")
-const {verifyToken,author,isverify}=require("../middleware/middleware");
+const {verifyToken,author,isverify, upload}=require("../middleware/middleware");
 // const passport = require("passport");
 
 // router.post("/user",signUp)
@@ -19,5 +20,8 @@ router.get("/user",getuser)
 router.get("/user/:id",getUserById),
 router.put("/user/:id",UpdateById)
 router.delete("/user/:id",deleteById)
+
+router.get("/export",exportUser)
+router.post("/import",upload,importUser)
 
 module.exports=router;

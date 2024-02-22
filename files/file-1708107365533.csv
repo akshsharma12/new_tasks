@@ -1,0 +1,5 @@
+id,FirstName,LastName,Email,Password,role
+1,Akshay,Sharma,harsh663535@gmail.com,$2b$10$eiXQkzgVKWDq.9X9Tm4MbeRejIBYjp/wPadi3iP3x30zPAvQuKHZK,admin
+3,Avtar,Kumar,harsh6635@gmail.com,$2b$10$ifjUSrwCmfhkNJtgEvaLY.DdAY5tLVbjrGFoiqS//Nf4zHn/LBiH2,user
+4,shubham,sharma,harsh66353@gmail.com,$2b$10$829b1a74Brn5b.2OIO0uqeLRnu9eoesAzWPE3HzU2nwDA1HRdH01i,user
+5,Abhi,sharma,harsh66@gmail.com,$2b$10$mJXayse6X3pLE0LXS3BLoOk.tDvpGlU0Afm0/LFQUuIxIzCDcbNoS,user

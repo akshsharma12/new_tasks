@@ -9,6 +9,8 @@ const bodyparser=require("body-parser")
 const router=require("./routes/route")
 const passport=require("passport")
 const session=require("express-session");
+const swaggerUI= require("swagger-ui-express");
+const swaggerDocument= require("./swagger.json")
 require("./connection/passport")(passport)
 // initializepassport(passport)
 
@@ -25,12 +27,17 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
+
+
 app.use(express.json())
 app.engine("html",cons.swig)
 app.set("view engine","html")
 app.set("views",tempelatepath)
 app.use(express.urlencoded({extended:false}))
 app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({extended:false}))
+app.use(express.static(path.resolve(__dirname,"files")))
+app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 app.use(router)
 
 

@@ -3,6 +3,8 @@ const jwt=require("jsonwebtoken")
 const bcrypt=require("bcrypt")
 const secretKey="donnn"
 const postmodal=require("../models/post")
+const CsvParser= require("json2csv").Parser
+const csvto= require("csvtojson")
 
 
 async function signUp(req,res){
@@ -165,10 +167,67 @@ catch(err)
 //   }
 // }
 
+async function exportUser(req,res){
+    try{
+    const users=[];
+    const userData= await modal.findAll()
+
+
+    userData.forEach((user)=>{
+        const {id,FirstName,LastName,Email,Password,role}=user
+       users.push({id,FirstName,LastName,Email,Password,role})
+    });
+
+    const titlefield= ["id","FirstName","LastName","Email","Password","role"]
+    const csvParser= new CsvParser({titlefield})
+    const csvData= csvParser.parse(users);
+
+    res.setHeader("content-Type","text/csv");
+    res.setHeader("content-Disposition","attachment:filename=userData.csv")
+
+    res.status(200).end(csvData)
+}catch(err)
+{
+    res.send({
+       status:400,
+       success:false,
+       msg:err.message
+    })
+}
+}
+
+async function importUser(req,res){
+    try{
+        const userData=[];
+       const result= await csvto()
+       .fromFile(req.file.path)
+       if(result)
+       {
+        for(var x=0;x<result.length;x++){
+            userData.push({
+                id:result[x].id,
+                FirstName:result[x].FirstName,
+                LastName:result[x].LastName,
+                Email:result[x].Email,
+                role:result[x].role,
+                Password:result[x].Password
+            })
+        }
+        await modal.bulkCreate(userData)
+        res.status(200).send("data inserted")
+       }
+       
+    
+    }catch(err){
+        console.log(err)
+        res.status(400).send(err)
+    }
+}
 
 
 module.exports=
 {signUp,
  Login,
 getuser,
-getUserById,UpdateById,deleteById}
+getUserById,UpdateById,deleteById,
+exportUser,importUser}
