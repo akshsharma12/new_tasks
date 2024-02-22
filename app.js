@@ -7,11 +7,15 @@ const sequelize= require("./connection/database")
 const user=require("./models/user")
 const bodyparser=require("body-parser")
 const router=require("./routes/route")
+const cors=require("cors")
+
 const passport=require("passport")
 const session=require("express-session");
+
 const swaggerUI= require("swagger-ui-express");
 const swaggerDocument= require("./swagger.json")
 require("./connection/passport")(passport)
+const port=5000;
 // initializepassport(passport)
 
 app.use(session({
@@ -39,6 +43,7 @@ app.use(bodyparser.urlencoded({extended:false}))
 app.use(express.static(path.resolve(__dirname,"files")))
 app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 app.use(router)
+app.use(cors())
 
 
 app.get("/",(req,res)=>{
@@ -69,6 +74,6 @@ sequelize.sync(
     console.log(err);
 })
 
-app.listen(5000,()=>{
-    console.log("port connected")
+app.listen(port,()=>{
+    console.log(`port connected ${port}`)
 })

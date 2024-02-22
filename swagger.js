@@ -8,7 +8,8 @@ const option={
             version:"1.0.0",
             description:"A simple express crud_operation Api"
         },
-              host:"http://localhost:5000"
+                host:"http://localhost:5000",
+                basePath:"/"
      }
 }
 const outputFile="./swagger.json";

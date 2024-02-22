@@ -30,11 +30,11 @@ async function signUp(req,res){
         })
     } else
     {
-        res.json({ message:"user exit"})
+        res.status(400).json({ message:"user exit"})
     }
     }catch(err)
     {
-        res.json({message:err.message})
+        res.status(500).json({message:err.message})
     }
 }
 

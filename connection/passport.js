@@ -14,6 +14,7 @@ passport.use(new LocalStrategy({usernameField:"Email",passwordField:"Password"},
             console.log(result)
             if(result)
             return done(null,user)
+            
             else
             return done(null,false,{message:"Password is incorrect"})
         }

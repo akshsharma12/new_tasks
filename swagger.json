@@ -43,6 +43,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -184,6 +190,7 @@
       "version": "1.0.0",
       "description": "A simple express crud_operation Api"
     },
-    "host": "http://localhost:5000"
+    "host": "http://localhost:5000",
+    "basePath": "/"
   }
 }
